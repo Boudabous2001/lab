@@ -119,7 +119,7 @@
 
 <script>
 const EXPERIMENTS = [
-  {tag: 'GAME', title: 'A game made in 6 minutes', text: 'An original arcade game, made in 5 min 52 s. Then a robot played it 100 times: 0 crashes, best score 14,200. Can you beat it?', video: 'y1VMEr_ZCIo', play: 'https://boudabous2001.github.io/bug-rush/'},
+  {tag: 'GAME', title: 'A game made in 6 minutes', text: 'An original arcade game, made in 5 min 52 s. Then a robot played it 100 times: 0 crashes, best score 14,200. Can you beat it?', video: 'y1VMEr_ZCIo', play: 'https://boudabous2001.github.io/bug-rush/', img: 'img/bug-rush.jpg'},
   {tag: '1-HOUR CHALLENGE', title: 'A Spotify clone in 1 hour', text: 'Done in 10 min 16 s. The official score was 14/20, and the 6 failures turned out to be bugs in the tests, not in the app.', video: 'pWjRnVuCtcY'},
   {tag: 'BEHIND THE SCENES', title: 'A whole video made with code', text: 'Script, voice, subtitles in 3 languages and the full edit written as code. Plus what it still can’t do.', video: 'uGGI3PJpsoA'},
   {tag: 'SAME PROMPT', title: 'Lovable vs Bolt vs v0', text: 'Three AI app builders, the same prompt, the free plans. Only one shipped 0 bugs.', video: 'xYBE6wSSUF0'},
@@ -131,7 +131,7 @@ const esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&g
 document.getElementById('cards').innerHTML = EXPERIMENTS.map(x => `
   <article class="card">
     <a class="thumb" href="https://youtu.be/${x.video}" target="_blank" rel="noopener" aria-label="Watch: ${esc(x.title)}"
-       style="background-image:url('https://i.ytimg.com/vi/${x.video}/hqdefault.jpg')"></a>
+       style="background-image:url('${x.img || `https://i.ytimg.com/vi/${x.video}/hqdefault.jpg`}')"></a>
     <div class="body">
       <div class="tag">${esc(x.tag)}</div>
       <h4>${esc(x.title)}</h4>
