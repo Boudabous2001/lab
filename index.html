@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev Room 404 Lab</title>
+<meta name="description" content="Real experiments with code, and the real numbers. Play our games, watch a hacker trap live.">
+<meta property="og:title" content="Dev Room 404 Lab">
+<meta property="og:description" content="Real experiments with code, and the real numbers. A hacker trap is running live right now.">
+<meta name="theme-color" content="#07090D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090D'/%3E%3Cpath d='M24 12h16M28 12v14L16 48a4 4 0 0 0 3.5 6h25A4 4 0 0 0 48 48L36 26V12' fill='none' stroke='%23C6FF3D' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='30' cy='44' r='3' fill='%23C6FF3D'/%3E%3Ccircle cx='38' cy='38' r='2' fill='%23C6FF3D'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #07090D; --panel: #0E1218; --line: #1C232D; --text: #F4F6FA; --muted: #8B95A5;
+    --lime: #C6FF3D; --red: #FF4D5E; --amber: #FFB547;
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Mono", Consolas, monospace;
+    --sans: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 var(--sans); }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 28px 0 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .brand { font: 700 14px/1 var(--mono); letter-spacing: .12em; }
+  .brand b { color: var(--lime); font-weight: 700; }
+  .sub-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; background: #FF0033; color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; white-space: nowrap; }
+  .hero { padding: 36px 0 28px; }
+  .hero h1 { margin: 0; font-size: clamp(34px, 7vw, 64px); line-height: 1.02; letter-spacing: -.02em; }
+  .hero h1 span { color: var(--lime); }
+  .hero p { margin: 14px 0 0; color: var(--muted); font-size: clamp(16px, 2.4vw, 19px); max-width: 620px; }
+
+  /* live trap */
+  .trap { position: relative; border: 1px solid #3A1218; background: radial-gradient(120% 140% at 0% 0%, #1A0A0E 0%, var(--panel) 55%); border-radius: 20px; padding: 22px; overflow: hidden; }
+  .trap::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px); }
+  .live { display: inline-flex; align-items: center; gap: 8px; font: 700 12px/1 var(--mono); letter-spacing: .14em; color: var(--red); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(255,77,94,.6); animation: pulse 1.6s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(255,77,94,0); } 100% { box-shadow: 0 0 0 0 rgba(255,77,94,0); } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+  .trap h2 { margin: 12px 0 4px; font-size: clamp(22px, 3.6vw, 30px); }
+  .trap .lead { margin: 0; color: var(--muted); max-width: 640px; }
+  .counter { margin: 18px 0 2px; font: 700 clamp(56px, 13vw, 116px)/1 var(--mono); color: var(--text); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .counter-label { font: 600 13px/1.2 var(--mono); color: var(--red); letter-spacing: .1em; text-transform: uppercase; }
+  .grid4 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 20px; }
+  @media (min-width: 720px) { .grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .stat { background: rgba(255,255,255,.03); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .stat b { display: block; font: 700 26px/1.1 var(--mono); font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 13px; }
+  .flags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .flag { font: 13px/1 var(--mono); padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+  .progress { margin-top: 18px; }
+  .bar { height: 8px; border-radius: 99px; background: #1A1F27; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--red), var(--amber)); }
+  .meta { margin-top: 8px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--muted); font: 12px/1.4 var(--mono); }
+  .fact { margin-top: 18px; padding: 12px 14px; border-left: 3px solid var(--lime); background: rgba(198,255,61,.05); border-radius: 0 10px 10px 0; font-size: 15px; }
+  .fact b { color: var(--lime); }
+
+  /* experiments */
+  h3.section { margin: 44px 0 14px; font: 700 13px/1 var(--mono); letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+  .cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 960px) { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+  .thumb { aspect-ratio: 16 / 9; background: #11161D center / cover no-repeat; }
+  .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .tag { font: 700 11px/1 var(--mono); letter-spacing: .12em; color: var(--lime); }
+  .card h4 { margin: 0; font-size: 19px; line-height: 1.25; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; flex: 1; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 12px; border-radius: 9px; font-weight: 700; font-size: 14px; text-decoration: none; border: 1px solid var(--line); }
+  .btn.play { background: var(--lime); color: #07090D; border-color: var(--lime); }
+  .btn:focus-visible, .sub-btn:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+
+  footer { margin: 52px 0 36px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: grid; gap: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">DEV ROOM <b>404</b> · LAB</div>
+    <a class="sub-btn" href="https://www.youtube.com/@DevRoom404?sub_confirmation=1" target="_blank" rel="noopener">▶ Subscribe</a>
+  </header>
+
+  <section class="hero">
+    <h1>Real experiments with code.<br><span>Real numbers.</span></h1>
+    <p>We build things in an hour, trap hackers, race robots against humans, and show exactly what happened. No fake results.</p>
+  </section>
+
+  <section class="trap" aria-labelledby="trap-title">
+    <div class="live"><i class="dot" aria-hidden="true"></i> LIVE EXPERIMENT</div>
+    <h2 id="trap-title">We left a server open to hackers for 7 days.</h2>
+    <p class="lead">A fake server and a fake website, built to look easy to break into. Every visit is real. Here is what happened so far.</p>
+    <div class="counter" id="attacks">…</div>
+    <div class="counter-label">attacks so far</div>
+    <div class="grid4">
+      <div class="stat"><b id="logins">…</b><span>password attempts</span></div>
+      <div class="stat"><b id="web">…</b><span>visits to the fake website</span></div>
+      <div class="stat"><b id="ips">…</b><span>different attackers</span></div>
+      <div class="stat"><b id="countries">…</b><span>countries</span></div>
+    </div>
+    <div class="flags" id="flags" aria-label="Top countries"></div>
+    <div class="fact" id="fact" hidden></div>
+    <div class="progress">
+      <div class="bar"><i id="bar"></i></div>
+      <div class="meta"><span id="day">Day …</span><span id="updated">updated …</span></div>
+    </div>
+    <p class="lead" style="margin-top:14px">The #1 password they tried, and what they typed once they got “in”: in the video, out <b>Nov 26</b>.</p>
+  </section>
+
+  <h3 class="section">Experiments</h3>
+  <div class="cards" id="cards"></div>
+
+  <footer>
+    <div>Dev Room 404 · one real experiment every week · <a href="https://www.youtube.com/@DevRoom404" target="_blank" rel="noopener">youtube.com/@DevRoom404</a></div>
+    <div>This page has no cookies and no tracking. Trap numbers are totals only: no addresses are published.</div>
+    <div>Country data: <a href="https://db-ip.com" target="_blank" rel="noopener">IP Geolocation by DB-IP</a> (CC BY 4.0).</div>
+  </footer>
+</div>
+
+<script>
+const EXPERIMENTS = [
+  {tag: 'GAME', title: 'A game made in 6 minutes', text: 'An original arcade game, made in 5 min 52 s. Then a robot played it 100 times: 0 crashes, best score 14,200. Can you beat it?', video: 'y1VMEr_ZCIo', play: 'https://boudabous2001.github.io/bug-rush/'},
+  {tag: '1-HOUR CHALLENGE', title: 'A Spotify clone in 1 hour', text: 'Done in 10 min 16 s. The official score was 14/20, and the 6 failures turned out to be bugs in the tests, not in the app.', video: 'pWjRnVuCtcY'},
+  {tag: 'BEHIND THE SCENES', title: 'A whole video made with code', text: 'Script, voice, subtitles in 3 languages and the full edit written as code. Plus what it still can’t do.', video: 'uGGI3PJpsoA'},
+  {tag: 'SAME PROMPT', title: 'Lovable vs Bolt vs v0', text: 'Three AI app builders, the same prompt, the free plans. Only one shipped 0 bugs.', video: 'xYBE6wSSUF0'},
+  {tag: '1-HOUR CHALLENGE', title: 'An online store in 1 hour', text: 'One hour for an AI agent to build an online store. The honest results.', video: 'gNJAFCDV_SE'},
+];
+const fmt = n => typeof n === 'number' ? n.toLocaleString('en-US') : '—';
+const esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+
+document.getElementById('cards').innerHTML = EXPERIMENTS.map(x => `
+  <article class="card">
+    <a class="thumb" href="https://youtu.be/${x.video}" target="_blank" rel="noopener" aria-label="Watch: ${esc(x.title)}"
+       style="background-image:url('https://i.ytimg.com/vi/${x.video}/hqdefault.jpg')"></a>
+    <div class="body">
+      <div class="tag">${esc(x.tag)}</div>
+      <h4>${esc(x.title)}</h4>
+      <p>${esc(x.text)}</p>
+      <div class="actions">
+        ${x.play ? `<a class="btn play" href="${x.play}" target="_blank" rel="noopener">▶ Play</a>` : ''}
+        <a class="btn" href="https://youtu.be/${x.video}" target="_blank" rel="noopener">Watch the video</a>
+      </div>
+    </div>
+  </article>`).join('');
+
+const flag = cc => /^[A-Z]{2}$/.test(cc) ? String.fromCodePoint(...[...cc].map(c => 0x1F1E6 + c.charCodeAt(0) - 65)) : '';
+let regionName = cc => cc;
+try { const dn = new Intl.DisplayNames(['en'], {type: 'region'}); regionName = cc => dn.of(cc) || cc; } catch (e) {}
+
+function ago(iso) {
+  const m = Math.max(0, Math.round((Date.now() - new Date(iso)) / 60000));
+  return m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} d ago`;
+}
+
+async function loadTrap() {
+  try {
+    const r = await fetch('trap.json?t=' + Date.now(), {cache: 'no-store'});
+    const d = await r.json();
+    document.getElementById('attacks').textContent = fmt(d.attacks);
+    document.getElementById('logins').textContent = fmt(d.login_attempts);
+    document.getElementById('web').textContent = fmt(d.web_requests);
+    document.getElementById('ips').textContent = fmt(d.unique_ips);
+    document.getElementById('countries').textContent = fmt(d.countries);
+    document.getElementById('flags').innerHTML = (d.top_countries || []).map(c => `<span class="flag">${flag(c)} ${esc(regionName(c))}</span>`).join('');
+    if (typeof d.first_bot_seconds === 'number') {
+      const f = document.getElementById('fact');
+      f.innerHTML = `The fake website was online for <b>${d.first_bot_seconds} seconds</b> before the first bot showed up.`;
+      f.hidden = false;
+    }
+    const days = (new Date(d.updated) - new Date(d.online_since)) / 86400000;
+    document.getElementById('bar').style.width = Math.min(100, days / 7 * 100).toFixed(1) + '%';
+    document.getElementById('day').textContent = `Day ${Math.min(7, Math.floor(days) + 1)} of 7`;
+    document.getElementById('updated').textContent = `updated ${ago(d.updated)}`;
+  } catch (e) {
+    document.getElementById('updated').textContent = 'numbers unavailable right now';
+  }
+}
+loadTrap();
+setInterval(loadTrap, 120000);
+</script>
+</body>
+</html>
