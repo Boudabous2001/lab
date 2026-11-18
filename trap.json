@@ -1,18 +1,18 @@
 {
- "updated": "2026-11-17T23:06:24+00:00",
+ "updated": "2026-11-18T08:38:49+00:00",
  "online_since": "2026-11-17T16:02:03+00:00",
- "attacks": 321,
- "login_attempts": 238,
- "web_requests": 48,
- "unique_ips": 69,
- "countries": 30,
+ "attacks": 823,
+ "login_attempts": 554,
+ "web_requests": 113,
+ "unique_ips": 177,
+ "countries": 42,
  "top_countries": [
   "US",
   "NL",
-  "KR",
-  "DE",
-  "CA",
-  "FR"
+  "GB",
+  "BE",
+  "FR",
+  "DE"
  ],
  "first_bot_seconds": 21
 }
