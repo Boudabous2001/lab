@@ -6,7 +6,7 @@
 <title>Dev Room 404 Lab</title>
 <meta name="description" content="Real experiments with code, and the real numbers. Play our games, watch a hacker trap live.">
 <meta property="og:title" content="Dev Room 404 Lab">
-<meta property="og:description" content="Real experiments with code, and the real numbers. A hacker trap ran live for 4 days.">
+<meta property="og:description" content="Real experiments with code, and the real numbers. A hacker trap ran for 3 days: here are the real numbers.">
 <meta name="theme-color" content="#07090D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307090D'/%3E%3Cpath d='M24 12h16M28 12v14L16 48a4 4 0 0 0 3.5 6h25A4 4 0 0 0 48 48L36 26V12' fill='none' stroke='%23C6FF3D' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='30' cy='44' r='3' fill='%23C6FF3D'/%3E%3Ccircle cx='38' cy='38' r='2' fill='%23C6FF3D'/%3E%3C/svg%3E">
 <style>
@@ -87,11 +87,11 @@
   </section>
 
   <section class="trap" aria-labelledby="trap-title">
-    <div class="live"><i class="dot" aria-hidden="true"></i> LIVE EXPERIMENT</div>
-    <h2 id="trap-title">We left a server open to hackers for 4 days.</h2>
-    <p class="lead">A fake server and a fake website, built to look easy to break into. Every visit is real. Here is what happened so far.</p>
+    <div class="live">FINAL RESULTS</div>
+    <h2 id="trap-title">We left a server open to hackers for 3 days.</h2>
+    <p class="lead">A fake server and a fake website, built to look easy to break into. Every visit was real. Here is what happened.</p>
     <div class="counter" id="attacks">…</div>
-    <div class="counter-label">attacks so far</div>
+    <div class="counter-label">attacks in 81 hours</div>
     <div class="grid4">
       <div class="stat"><b id="logins">…</b><span>password attempts</span></div>
       <div class="stat"><b id="web">…</b><span>visits to the fake website</span></div>
@@ -168,8 +168,8 @@ async function loadTrap() {
       f.hidden = false;
     }
     const days = (new Date(d.updated) - new Date(d.online_since)) / 86400000;
-    document.getElementById('bar').style.width = Math.min(100, days / 4 * 100).toFixed(1) + '%';
-    document.getElementById('day').textContent = `Day ${Math.min(4, Math.floor(days) + 1)} of 4`;
+    document.getElementById('bar').style.width = Math.min(100, 100).toFixed(1) + '%';
+    document.getElementById('day').textContent = `Ran for ${Math.round(days * 24)} hours, then we shut it down`;
     document.getElementById('updated').textContent = `updated ${ago(d.updated)}`;
   } catch (e) {
     document.getElementById('updated').textContent = 'numbers unavailable right now';

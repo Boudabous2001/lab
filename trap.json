@@ -1,11 +1,11 @@
 {
- "updated": "2026-11-21T00:52:05+00:00",
+ "updated": "2026-11-21T01:07:12+00:00",
  "online_since": "2026-11-17T16:02:03+00:00",
- "attacks": 16796,
- "login_attempts": 15184,
+ "attacks": 16815,
+ "login_attempts": 15200,
  "web_requests": 651,
- "unique_ips": 756,
- "countries": 73,
+ "unique_ips": 758,
+ "countries": 74,
  "top_countries": [
   "US",
   "NL",
